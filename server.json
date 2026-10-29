@@ -1,0 +1,45 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.zapzapapi/zapzap-mcp",
+  "title": "ZapZap API (WhatsApp)",
+  "description": "Managed WhatsApp API for AI agents: send messages, media, polls, manage instances, groups, webhooks.",
+  "version": "0.1.0",
+  "websiteUrl": "https://zapzapapi.com",
+  "repository": {
+    "url": "https://github.com/zapzapapi/zapzap-mcp",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "zapzap-mcp",
+      "version": "0.1.0",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        {
+          "name": "ZAPZAP_API_KEY",
+          "description": "API key from the ZapZap dashboard (Settings > API). Sent as the x-api-key header.",
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "ZAPZAP_API_SECRET",
+          "description": "API secret from the ZapZap dashboard. Sent as the x-api-secret header.",
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "ZAPZAP_INSTANCE_ID",
+          "description": "Optional default instance id so tools do not need instance_id on every call.",
+          "isRequired": false
+        },
+        {
+          "name": "ZAPZAP_READ_ONLY",
+          "description": "Set to true to expose only read-only tools (no sending).",
+          "isRequired": false
+        }
+      ]
+    }
+  ]
+}

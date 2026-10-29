@@ -1,0 +1,37 @@
+# Smithery configuration: runs the published npm package over stdio.
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    required:
+      - zapzapApiKey
+      - zapzapApiSecret
+    properties:
+      zapzapApiKey:
+        type: string
+        title: ZapZap API key
+        description: API key from the ZapZap dashboard (Settings > API).
+      zapzapApiSecret:
+        type: string
+        title: ZapZap API secret
+        description: API secret from the ZapZap dashboard.
+      zapzapInstanceId:
+        type: string
+        title: Default instance id
+        description: Optional default WhatsApp instance id.
+      readOnly:
+        type: boolean
+        default: false
+        title: Read-only mode
+        description: Expose only read-only tools (no message sending).
+  commandFunction: |-
+    (config) => ({
+      command: 'npx',
+      args: ['-y', 'zapzap-mcp'],
+      env: {
+        ZAPZAP_API_KEY: config.zapzapApiKey,
+        ZAPZAP_API_SECRET: config.zapzapApiSecret,
+        ...(config.zapzapInstanceId ? { ZAPZAP_INSTANCE_ID: config.zapzapInstanceId } : {}),
+        ...(config.readOnly ? { ZAPZAP_READ_ONLY: 'true' } : {})
+      }
+    })

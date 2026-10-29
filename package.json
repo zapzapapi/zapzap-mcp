@@ -1,0 +1,62 @@
+{
+  "name": "zapzap-mcp",
+  "version": "0.1.0",
+  "mcpName": "io.github.zapzapapi/zapzap-mcp",
+  "description": "MCP server for ZapZap API: send WhatsApp messages, media, polls and buttons, manage instances, groups and webhooks from Claude, Cursor and any AI agent. Managed WhatsApp API, pt-BR first.",
+  "type": "module",
+  "main": "./dist/src/index.js",
+  "bin": {
+    "zapzap-mcp": "dist/src/index.js"
+  },
+  "files": [
+    "dist/src",
+    "README.md",
+    "README.pt-BR.md",
+    "README.es.md",
+    "LICENSE",
+    "server.json"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "npm run build && node --test dist/test/client.test.js dist/test/tools.test.js dist/test/server.test.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "whatsapp",
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "whatsapp-api",
+    "whatsapp-mcp",
+    "ai-agent",
+    "claude",
+    "cursor",
+    "n8n",
+    "pt-br",
+    "zapzap",
+    "chatbot",
+    "messaging"
+  ],
+  "author": "GM Solutions Hub LTDA <contato@zapzapapi.com>",
+  "license": "MIT",
+  "homepage": "https://zapzapapi.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zapzapapi/zapzap-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zapzapapi/zapzap-mcp/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "typescript": "5.9.3"
+  }
+}
