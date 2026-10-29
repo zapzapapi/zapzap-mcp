@@ -1,5 +1,6 @@
 name: Release
-# Publishes to npm via Trusted Publisher (OIDC). No NPM_TOKEN stored anywhere.
+# Publishes to npm. If the NPM_TOKEN secret exists (granular token, bypass 2FA), uses it; otherwise
+# falls back to Trusted Publisher (OIDC), which needs no token.
 # Trigger: push a tag like v0.1.0 (must match package.json version).
 on:
   push:
@@ -10,6 +11,8 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -23,4 +26,11 @@ jobs:
       - run: npm test
       - name: Upgrade npm (Trusted Publisher needs npm >= 11.5.1)
         run: npm install -g npm@latest
-      - run: npm publish --provenance --access public
+      - name: Publish with token
+        if: env.NPM_TOKEN != ''
+        run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish with Trusted Publisher (OIDC)
+        if: env.NPM_TOKEN == ''
+        run: npm publish --provenance --access public
