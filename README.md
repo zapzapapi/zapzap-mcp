@@ -110,6 +110,6 @@ Optional Streamable HTTP transport: `npx -y zapzap-mcp --http --port 3333` (bind
 - For AI agents: https://zapzapapi.com/agentes
 - llms.txt: https://zapzapapi.com/llms.txt
 - OpenAPI: https://zapzapapi.com/openapi/zapzap-openapi.en.json
-- Node SDK: `@zapzapapi/sdk`
+- Node SDK: `zapzapapi`
 
 MIT License, GM Solutions Hub LTDA.
